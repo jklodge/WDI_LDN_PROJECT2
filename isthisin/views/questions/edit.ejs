@@ -1,0 +1,29 @@
+<div class="container">
+  <form method="POST" action="/questions/<%= question._id %>">
+
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" name="title" type="text" placeholder="Title" value="<%= question.title %>" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image" value="<% question.image %>">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">More info? max 200 characters</label>
+      <div class="control">
+        <textarea class="textarea" name="moreinfo" placeholder="Tasting Notes (380 chars max)" maxlength="380"><%= question.moreinfo %></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,60 @@
+<div class="container">
+  <form method="POST" action="/questions">
+    <div class="field">
+      <label class="label">Question</label>
+      <div class="control">
+        <input class="input" name="title" type="text" placeholder="What's your question?" required minlength='2'>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <form>
+        <input class="input" name="image" type="text" placeholder="Image" pattern="^http">
+      </form>
+      </div>
+    </div>
+    <input type="button" value="upload" class="button is-primary" id="upload" onclick="return upload()">
+    <script>
+         //Instantiating dialog with Filestack
+         const client = filestack.init("AB6Lmdk1RRjG0sQAhRSpsz");
+         let uploadHandle = '';
+         const transformURL = "https://cdn.filestack.com/watermark=file:";
+
+         //Filestack API method 'pick()' that opens the file picker
+         // client.pick({});
+         function upload() {
+           //Limiting file types and number for uploading in the picker
+          console.log('upload it');
+           client.pick({
+             //Only accepting files with a mimetype 'image/*'
+             accept: 'image/*',
+             //Only accepting at most 1 file
+             maxFiles:1,
+            }).then(function(result) {//Taking the results object in as 'result'
+         //Putting the result in a string, and printing it to the console
+         console.log(JSON.stringify(result));
+         //Sets the watermark handle to the handle of the first file in the result
+         uploadHandle = result.filesUploaded[0].handle;
+         //Logs the new watermark handle in the console
+         console.log(uploadHandle);
+          });
+        }
+        
+     </script>
+
+    <div class="field">
+      <label class="label">Give us more! Is it for a first date, interview, meet the parents etc?</label>
+      <div class="control">
+        <input class="input" name="moreinfo" type="text" placeholder="First date outfit" required minlength="2">
+      </div>
+    </div>
+
+
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+  </form>
+</div>

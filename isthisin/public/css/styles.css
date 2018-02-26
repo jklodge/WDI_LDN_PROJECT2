@@ -1,0 +1,67 @@
+.homepage {
+  color: black;
+}
+.hero.homepage {
+  background-image: url(/images/mainmodel.jpg);
+  background-size: cover;
+  color: black;
+}
+.navbar {
+  background-color: #2d2d2d;
+  color: white;
+}
+.navbar-item {
+  color: white;
+  font-family: 'Indie Flower', cursive;
+  font-size: 20px;
+  font-weight: bold;
+}
+.card {
+  margin-top: 30px;
+  height: 100%;
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+  background-color: #dfddde;
+}
+.card-content{
+  padding: 10px;
+}
+.card-image {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 250px;
+}
+.container {
+  margin: 20px auto;
+}
+.column {
+  font-family: 'Open Sans', sans-serif;
+}
+.colone {
+  text-align: center;
+}
+.coltwo {
+  margin-top: 20px;
+}
+
+a + form {
+  display: inline-block;
+}
+.voteButtons {
+  margin-top: 20px;
+}
+p.user {
+    display: inline-block;
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+p {
+  padding: 10px;
+}
+
+.fa-user {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}

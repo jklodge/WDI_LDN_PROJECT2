@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="/images/questions.jpg" width="50px" height="100px" alt="fashion logo">
+      &nbsp;
+      Questions
+    </a>
+    <div class="navbar-burger" data-target="#mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div id="mobile-menu" class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="/questions">All Questions Asked</a>
+      <% if(locals.isAuthenticated) { %>
+        <a class="navbar-item" href="/questions/new">Add a Question</a>
+        <a class="navbar-item" href="/users/<%= locals.currentUser._id %>"> <%= locals.currentUser.username %> </a>
+        <a class="navbar-item" href="/logout">Logout</a>
+
+        <%  } else { %>
+        <a class="navbar-item" href="/register">Register</a>
+        <a class="navbar-item" href="/login">Login</a>
+        <% } %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,24 @@
+<main class="container">
+  <div class="columns is-multiline">
+
+    <% questions.forEach(question => { %>
+    <div class="column is-one-quarter-desktop is-half-tablet">
+     <a href="/questions/<%= question.id %>">
+      <div class="card">
+        <div class="card-content">
+        <h3 class="title"><%= question.title %></h3>
+        </div>
+        <div class="card-image" style="background-image: url(<%= question.image %>)">
+        </div>
+        <div class="voteButtons">
+         <a href="/questions" class="button is-success is-rounded">Yay</a>
+         <a href="/questions" class="button is-warning is-rounded">Sorry, not Sorry</a>
+        </div>
+      </div>
+      </a>
+    </div>
+
+    <% }) %>
+
+  </div>
+</main>
