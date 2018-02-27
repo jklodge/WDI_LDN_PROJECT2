@@ -23,7 +23,13 @@ router.route('/users')
   .get(users.index);
 
 router.route('/users/:id')
-  .get(users.show);
+  .get(secureRoute, users.show);
+
+router.route('/questions/:id/upvote')
+  .post(secureRoute, questions.upvote);
+
+router.route('/questions/:id/downvote')
+  .post(secureRoute, questions.downvote);
 
 router.route('/questions/:id/edit')
   .get(secureRoute, questions.edit);

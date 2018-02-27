@@ -8,6 +8,7 @@ mongoose.Promise = require('bluebird');
 const session = require('express-session');
 const flash = require('express-flash');
 const userAuth = require('./lib/userAuth');
+const formidable = require('formidable');
 //create our Express app
 const app = express();
 

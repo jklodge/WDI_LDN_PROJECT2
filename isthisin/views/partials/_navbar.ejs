@@ -3,7 +3,7 @@
     <a class="navbar-item" href="/">
       <img src="/images/questions.jpg" width="50px" height="100px" alt="fashion logo">
       &nbsp;
-      Questions
+      Home
     </a>
     <div class="navbar-burger" data-target="#mobile-menu">
       <span></span>
@@ -13,9 +13,9 @@
   </div>
   <div id="mobile-menu" class="navbar-menu">
     <div class="navbar-end">
-      <a class="navbar-item" href="/questions">All Questions Asked</a>
+      <a class="navbar-item" href="/questions">Is this in?</a>
       <% if(locals.isAuthenticated) { %>
-        <a class="navbar-item" href="/questions/new">Add a Question</a>
+        <a class="navbar-item" href="/questions/new">Ask a Question</a>
         <a class="navbar-item" href="/users/<%= locals.currentUser._id %>"> <%= locals.currentUser.username %> </a>
         <a class="navbar-item" href="/logout">Logout</a>
 

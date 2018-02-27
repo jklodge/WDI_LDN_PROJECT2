@@ -7,54 +7,53 @@
       </figure>
     </div>
     <div class="column coltwo">
-      <div class="icon is-medium">
-        <i class="fa fa-user"><p class="user"> <%= locals.currentUser.username %> </p></i>
-      </div>
       <p><%= question.moreinfo %></p>
 
+      <hr />
+
+      <ul class="comments">
+        <% question.comments.forEach(comment => { %>
+          <li>
+          <div class="box">
+          <% if(comment.isOwnedBy(locals.currentUser)) { %>
+            <form class="delete" method="POST" action="/questions/<%= question._id %>/comments/<%= comment._id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="delete">x</button>
+            </form>
+          <% } %>
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <%= comment.content %>
+                    </p>
+                    <% if(comment.user) { %>
+                    <%= comment.user.username %>
+                    <% } %>
+                </div>
+              </div>
+            </article>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
 
 
       <% if(locals.isAuthenticated) { %>
+        <div class="icon is-medium">
+          <i class="fa fa-user"><p class="user"> <%= locals.currentUser.username %> </p></i>
+        </div>
         <a href="/questions/<%= question._id %>/edit" class="button is-light">Edit</a>
 
         <form method="POST" action="/questions/<%= question._id %>">
           <input type="hidden" name="_method" value="DELETE">
           <button class="button is-dark">Delete</button>
         </form>
-
-        <hr />
-
-        <ul class="comments">
-          <% question.comments.forEach(comment => { %>
-            <li>
-            <div class="box">
-            <% if(comment.isOwnedBy(locals.currentUser)) { %>
-              <form class="delete" method="POST" action="/questions/<%= question._id %>/comments/<%= comment._id %>">
-                <input type="hidden" name="_method" value="DELETE">
-                <button class="delete">x</button>
-              </form>
-            <% } %>
-              <article class="media">
-                <div class="media-left">
-                  <figure class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <%= comment.content %>
-                      </p>
-                      <% if(comment.user) { %>
-                      <%= comment.user.username %>
-                      <% } %>
-                  </div>
-                </div>
-              </article>
-              </div>
-            </li>
-          <% }) %>
-        </ul>
 
         <form method="POST" action="/questions/<%= question._id %>/comments">
         <textarea class="textarea" name="content" placeholder="Dont just vote, give them tips!"></textarea>

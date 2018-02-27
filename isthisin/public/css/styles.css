@@ -3,17 +3,19 @@
 }
 .hero.homepage {
   background-image: url(/images/mainmodel.jpg);
-  background-size: cover;
+  background-size: stretch;
+  height: 100%;
   color: black;
 }
 .navbar {
   background-color: #2d2d2d;
   color: white;
+  height: 75px;
 }
 .navbar-item {
   color: white;
   font-family: 'Indie Flower', cursive;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 }
 .card {
@@ -59,9 +61,14 @@ p.user {
 }
 p {
   padding: 10px;
+  display: block;
 }
 
 .fa-user {
   margin-left: 40px;
   margin-bottom: 10px;
+}
+
+.middle {
+  margin-top: 30px;
 }

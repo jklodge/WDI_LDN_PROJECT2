@@ -10,11 +10,26 @@
         </div>
         <div class="card-image" style="background-image: url(<%= question.image %>)">
         </div>
+
         <div class="voteButtons">
-         <a href="/questions" class="button is-success is-rounded">Yay</a>
-         <a href="/questions" class="button is-warning is-rounded">Sorry, not Sorry</a>
+        <form method="POST" action="/questions/<%= question._id %>/upvote">
+          <% if(question.hasBeenUpvotedBy(locals.currentUser)) { %>
+            <button class="button upvote is-success is-rounded" disabled>Yay (<%= question.upvotes.length %>)</button>
+          <% } else { %>
+            <button class="button upvote is-success is-rounded">Yay (<%= question.upvotes.length %>)</button>
+          <% } %>
+        </form>
+        <form method="POST" action="/questions/<%= question._id %>/downvote">
+          <% if(question.hasBeenDownvotedBy(locals.currentUser)) { %>
+            <button class="button downvote is-warning is-rounded" disabled>Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+          <% } else{ %>
+            <button class="button downvote is-warning is-rounded">Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+          <% } %>
+        </form>
+
         </div>
       </div>
+
       </a>
     </div>
 
