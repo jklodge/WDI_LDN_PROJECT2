@@ -8,8 +8,8 @@
     </div>
     <div class="column">
       <% if(question.user) { %>
-        <img src="<%= question.user.imageSRC %>" alt="<%= question.user.username  %>" width="40px">
-        <p>User: <%= question.user.username %> </p>
+         <a href="/users/<%= question.user._id%>"><img src="<%= question.user.imageSRC %>" alt="<%= question.user.username  %>" width="40px"></a>
+        <p>User: <a href="/users/<%= question.user._id%>"><%= question.user.username %></a></p>
       <% } %>
       <p>Extra info: <%= question.moreinfo %></p>
       <p>Where is it from? <%= question.from %></p>

@@ -52,13 +52,18 @@ router.route('/register')
   .get(registrations.new)
   .post(registrations.create);
 
-
 router.route('/login')
   .get(sessions.new)
   .post(sessions.create);
 
 router.route('/logout')
   .get(sessions.delete);
+
+router.route('/users/:id/follow')
+  .post(secureRoute, users.followCreate);
+
+router.route('/users/:id/follow/:followId')
+  .delete(secureRoute, users.followDelete);
 
 router.all('/*', (req, res) => res.render('pages/404'));
 

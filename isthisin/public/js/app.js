@@ -37,10 +37,10 @@ $(() => {
     e.target.click();
   });
 
-  $burger.on('click', () => {
-    $burger.toggleClass('is-active');
-    $menu.toggleClass('is-active');
-  });
+  // $burger.on('click', () => {
+  //   $burger.toggleClass('is-active');
+  //   $menu.toggleClass('is-active');
+  // });
 
   $('form').validate();
   const uploadBtn = $('button.image-upload');
