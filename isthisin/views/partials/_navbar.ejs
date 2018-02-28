@@ -16,7 +16,10 @@
       <a class="navbar-item" href="/questions">Is this in?</a>
       <% if(locals.isAuthenticated) { %>
         <a class="navbar-item" href="/questions/new">Ask a Question</a>
-        <a class="navbar-item" href="/users/<%= locals.currentUser._id %>"> <%= locals.currentUser.username %> </a>
+        <a class="navbar-item" href="/users/<%= locals.currentUser._id %>">
+          <img class="imgNav" src="<%= locals.currentUser.imageSRC %>" />
+          <%= locals.currentUser.username %>
+        </a>
         <a class="navbar-item" href="/logout">Logout</a>
 
         <%  } else { %>

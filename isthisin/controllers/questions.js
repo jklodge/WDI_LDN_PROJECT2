@@ -1,19 +1,34 @@
 const Question = require('../models/question');//two dots means outside this folder
+const User = require('../models/user');//two dots means outside this folder
 
+const Promise = require('bluebird');
 function indexRoute(req, res) { //passing the array of questions into the index of question
 //use the Question model to get the data from the database
-  Question.find()
-    // pass the data into view
-    .then( questions => {
-      res.render('questions/index', {questions});
+  if(req.query.title === 'ALL') req.query = {};
+  Promise.props({
+    allQuestions: Question.find().exec(),
+    questions: Question.find(req.query).exec()
+  })
+    .then( data => {
+      const allTitles = data.allQuestions.map(question => question.title);
+      const uniqueTitles = Array.from(new Set(allTitles)).sort();
+
+      res.render('questions/index', {
+        questions: data.questions,
+        titles: uniqueTitles,
+        selectedTitle: req.query.title
+      });
     });
 }
+
 
 function newRoute(req, res) {
   res.render('questions/new');//why isn't it just get
 }
 
 function createRoute(req, res, next) {
+  req.body.user = req.currentUser;
+
   Question.create(req.body)
     .then(()=> res.redirect('/questions'))
     .catch(next);
@@ -21,8 +36,9 @@ function createRoute(req, res, next) {
 
 function showRoute(req, res, next) {
   Question.findById(req.params.id)
-    .populate('comments.user')
+    .populate('comments.user user')
     .then(question => {
+      console.log(question);
       if(!question) return res.render('pages/404');
       res.render('questions/show', { question });
     })
@@ -90,6 +106,26 @@ function downvoteRoute(req, res, next) {
     .catch(next);
 }
 
+function faveRoute(req, res, next) {
+  User.findById(req.currentUser._id)
+    .then(user => {
+      user.faves.push(req.params.id);
+      return user.save();
+    })
+    .then(() => res.redirect('/questions'))
+    .catch(next);
+}
+
+function deleteFaveRoute(req, res, next){
+  User.findById(req.currentUser._id)
+    .then(user => {
+      user.faves = user.faves.filter(fave => !fave.equals(req.params.id));
+      return user.save();
+    })
+    .then(() => res.redirect('/questions'))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -101,5 +137,7 @@ module.exports = {
   commentsCreate: commentsCreateRoute,
   commentsDelete: commentsDeleteRoute,
   upvote: upvoteRoute,
-  downvote: downvoteRoute
+  downvote: downvoteRoute,
+  fave: faveRoute,
+  deleteFave: deleteFaveRoute
 };

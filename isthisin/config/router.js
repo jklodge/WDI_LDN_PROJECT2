@@ -23,13 +23,21 @@ router.route('/users')
   .get(users.index);
 
 router.route('/users/:id')
-  .get(secureRoute, users.show);
+  .get(secureRoute, users.show)
+  .put(secureRoute, users.update);
+
+router.route('/users/:id/edit')
+  .get(secureRoute, users.edit);
 
 router.route('/questions/:id/upvote')
   .post(secureRoute, questions.upvote);
 
 router.route('/questions/:id/downvote')
   .post(secureRoute, questions.downvote);
+
+router.route('/questions/:id/favorite')
+  .post(secureRoute, questions.fave)
+  .get(secureRoute, questions.deleteFave);
 
 router.route('/questions/:id/edit')
   .get(secureRoute, questions.edit);
@@ -43,6 +51,7 @@ router.route('/questions/:id/comments/:commentId')
 router.route('/register')
   .get(registrations.new)
   .post(registrations.create);
+
 
 router.route('/login')
   .get(sessions.new)

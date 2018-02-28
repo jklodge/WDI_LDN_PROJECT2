@@ -20,7 +20,6 @@
 }
 .card {
   margin-top: 30px;
-  height: 100%;
   text-align: center;
   font-family: 'Indie Flower', cursive;
   background-color: #dfddde;
@@ -71,4 +70,31 @@ p {
 
 .middle {
   margin-top: 30px;
+}
+.icon {
+  display: inline-block;
+  padding-right: 30px;
+
+}
+.userp {
+  display: inline-block;
+  padding-left: 30px;
+  font-weight: bold;
+}
+.default {
+  cursor: default;
+}
+.imgNav {
+  margin-right: 10px;
+}
+img {
+  border-radius: 10px;
+}
+.profileHead p {
+  line-height: 50px;
+  display: inline-block;
+  padding: 0 0 0 10px;
+}
+.profileHead img {
+  float: left;
 }

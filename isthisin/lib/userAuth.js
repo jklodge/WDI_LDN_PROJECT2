@@ -10,6 +10,7 @@ function userAuth(req, res, next) {
   // otherwise use the ID to find the user in the database
   User
     .findById(req.session.userId)
+    .populate('faves')
     .then(user => {
 
       // if the user hasn't been found (perhaps if they have deleted their account)

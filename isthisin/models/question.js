@@ -12,12 +12,18 @@ commentSchema.methods.isOwnedBy = function(user) { //have to use .methods
 
 const schema = new mongoose.Schema({
   title: { type: String, minlength: 2, required: true },
-  image: { type: String, pattern: /^http/ },
+  image: { type: String },
   moreinfo: {type: String, maxlength: 360, required: true },
+  from: {type: String, maxlength: 360, required: true },
   upvotes: [{ type: mongoose.Schema.ObjectId, ref: 'User'}],
   downvotes: [{ type: mongoose.Schema.ObjectId, ref: 'User'}],
+  user: { type: mongoose.Schema.ObjectId, ref: 'User'},
   comments: [ commentSchema ]
 });
+
+schema.methods.isOwnedBy = function(user) {
+  return this.user && user && user._id.equals(this.user._id);
+};
 
 schema.methods.hasBeenUpvotedBy = function(user) {
   return user && this.upvotes.some(userId => user._id.equals(userId));

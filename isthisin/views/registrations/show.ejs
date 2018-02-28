@@ -1,0 +1,71 @@
+<main class="container">
+  <div class="columns">
+    <div class="column is-one-quarter-desktop is-half-tablet">
+      <label class="label">Username:</label>
+      <div class="usernameinput">
+        <p> <%= locals.currentUser.username  %> </p>
+      </div>
+      <label class="label">Email:</label>
+      <p> <%= locals.currentUser.email  %> </p>
+      <label class="label">About You:</label>
+      <p> <%= locals.currentUser.aboutyou  %> </p>
+      <div class="field">
+     <label class="label">Profile Image</label>
+     <img src="<%= locals.currentUser.imageSRC %>" alt="<%= locals.currentUser.username  %>">
+   </div>
+   <a href="/users/<%= user._id %>/edit" class="button is-light">Edit</a>
+ </div>
+
+
+    <div class="column is-one-quarter-desktop is-half-tablet">
+      <h3 class="title is-3">Your Faves</h3>
+      <% locals.currentUser.faves.forEach(question => { %>
+       <a href="/questions/<%= question.id %>">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title"><%= question.title %></h3>
+          </div>
+          <% if(!locals.currentUser.hasFavorited(question)){ %>
+            <form method="POST" action="/questions/<%= question._id %>/favorite">
+              <input type="hidden" name="_method" value="<% question._id %>">
+              <button type="button" class="button is-primary">Favourite</button>
+            </form>
+          <% } else { %>
+            <form method="POST" action="/questions/<%= question._id %>/favorite">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="button" class="button is-danger">Unfavourite</button>
+            </form>
+          <% } %>
+
+          <div class="card-image" style="background-image: url(<%= question.image %>)"></div>
+
+          <div class="voteButtons">
+            <form method="POST" action="/questions/<%= question._id %>/upvote">
+              <% if(question.hasBeenUpvotedBy(locals.currentUser)) { %>
+                <button class="button upvote is-success is-rounded" disabled>Yay (<%= question.upvotes.length %>)</button>
+              <% } else { %>
+                <button class="button upvote is-success is-rounded">Yay (<%= question.upvotes.length %>)</button>
+              <% } %>
+            </form>
+            <form method="POST" action="/questions/<%= question._id %>/downvote">
+              <% if(question.hasBeenDownvotedBy(locals.currentUser)) { %>
+                <button class="button downvote is-warning is-rounded" disabled>Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+              <% } else{ %>
+                <button class="button downvote is-warning is-rounded">Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+              <% } %>
+            </form>
+          </div>
+        </div>
+
+        </a>
+      <% }) %>
+    </div>
+    <div class="column">
+      <h3 class="title is-3">Followers</h3>
+
+  </div>
+  <div class="column">
+    <h3 class="title is-3">Following</h3>
+
+</div>
+</main>

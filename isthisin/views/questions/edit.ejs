@@ -11,11 +11,13 @@
     </div>
 
     <div class="field">
-      <label class="label">Image</label>
-      <div class="control">
-        <input class="input" name="image" type="text" placeholder="Image" value="<% question.image %>">
-      </div>
-    </div>
+   <label class="label">Image</label>
+   <div class="control">
+     <img class="imgPreview" src="" alt="">
+     <input type="hidden" name="image" required />
+     <button class="button image-upload" type="button">Choose an image to upload</button>
+   </div>
+ </div>
     <div class="field">
       <label class="label">More info? max 200 characters</label>
       <div class="control">

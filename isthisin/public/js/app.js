@@ -5,6 +5,7 @@ $(() => {
   const $burger = $('.navbar-burger');
   const $menu = $('.navbar-menu');
   const $voteButtons = $('.voteButtons');
+  const $fave = $('.fave');
 
   function uploadImage(e) {
     client.pick()
@@ -21,6 +22,14 @@ $(() => {
   }
 
   $voteButtons.on('click', (e) => {
+    console.log('i clicked up');
+    // e.preventDefault();
+    // get window position
+    window.localStorage.setItem('scrollTop', $(window).scrollTop());
+    e.target.click();
+  });
+
+  $fave.on('click', (e) => {
     console.log('i clicked up');
     // e.preventDefault();
     // get window position

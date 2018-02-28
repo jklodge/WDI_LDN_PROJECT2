@@ -1,6 +1,14 @@
 <main class="container">
+  <form>
+    <select name="title">
+      <option>ALL</option>
+      <% titles.forEach(title => { %>
+        <option<% if(title === selectedTitle) {%> selected<% } %>><%= title %></option>
+        <% }) %>
+      </select>
+      <button>Go</button>
+    </form>
   <div class="columns is-multiline">
-
     <% questions.forEach(question => { %>
     <div class="column is-one-quarter-desktop is-half-tablet">
      <a href="/questions/<%= question.id %>">
@@ -8,22 +16,32 @@
         <div class="card-content">
         <h3 class="title"><%= question.title %></h3>
         </div>
+        <% if (locals.currentUser) { %>
+          <% if(!locals.currentUser.hasFavorited(question)){ %>
+            <form method="POST" action="/questions/<%= question._id %>/favorite">
+              <button class="button is-primary fave"><i class="fa fa-heart fave"></i></button>
+            </form>
+          <% } else { %>
+            <form method="GET" action="/questions/<%= question._id %>/favorite">
+              <button class="button is-danger fave"><i class="fa fa-heart fave"></i></button>
+            </form>
+          <% } %>
+        <% } %>
         <div class="card-image" style="background-image: url(<%= question.image %>)">
         </div>
-
         <div class="voteButtons">
         <form method="POST" action="/questions/<%= question._id %>/upvote">
           <% if(question.hasBeenUpvotedBy(locals.currentUser)) { %>
-            <button class="button upvote is-success is-rounded" disabled>Yay (<%= question.upvotes.length %>)</button>
+            <button class="button upvote is-success is-rounded default" disabled>Yay (<%= question.upvotes.length %>)</button>
           <% } else { %>
-            <button class="button upvote is-success is-rounded">Yay (<%= question.upvotes.length %>)</button>
+            <button class="button upvote is-success is-rounded default">Yay (<%= question.upvotes.length %>)</button>
           <% } %>
         </form>
         <form method="POST" action="/questions/<%= question._id %>/downvote">
           <% if(question.hasBeenDownvotedBy(locals.currentUser)) { %>
-            <button class="button downvote is-warning is-rounded" disabled>Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+            <button class="button downvote is-warning is-rounded default" disabled>Sos, not Sos (<%= question.downvotes.length %>)</button>
           <% } else{ %>
-            <button class="button downvote is-warning is-rounded">Sorry, not Sorry (<%= question.downvotes.length %>)</button>
+            <button class="button downvote is-warning is-rounded default">Sos, not Sos (<%= question.downvotes.length %>)</button>
           <% } %>
         </form>
 

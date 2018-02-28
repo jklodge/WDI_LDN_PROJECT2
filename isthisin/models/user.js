@@ -4,8 +4,17 @@ const bcrypt = require('bcrypt');
 const schema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  image: { type: String },
+  aboutyou: {type: String, maxlength: 360, required: true },
+  faves: [{ type: mongoose.Schema.ObjectId, ref: 'Question'}]
 });
+
+schema
+  .virtual('imageSRC')
+  .get(function getImageSRC() {
+    return this.image || 'http://fillmurray.com/64/64';
+  });
 
 // set up the passwordConfirmation virtual
 schema
@@ -31,6 +40,7 @@ schema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
+
 schema.pre('save', function hashPassword(next) {
   // if the password has been modified, it needs to be hashed
   if(this.isModified('password')) {
@@ -41,5 +51,11 @@ schema.pre('save', function hashPassword(next) {
   // continue to the next step (save)
   next();
 });
+
+schema.methods.hasFavorited = function hasFavorited(question) {
+  return this.faves.some((favorite) => {
+    return favorite.equals(question._id);
+  });
+};
 
 module.exports = mongoose.model('User', schema);
