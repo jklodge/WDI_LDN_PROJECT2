@@ -1,35 +1,41 @@
 <main class="container">
   <div class="profileEdit">
   <h3> <%= user.username  %> </h3>
-  <a href="/users/<%= user._id %>/edit" class="button edit is-dark">Edit</a>
+  <% if(user._id.toString() === locals.currentUser._id.toString()) { %>
+      <a href="/users/<%= user._id %>/edit" class="button edit is-dark">Edit</a>
+  <% } %>
 </div>
   <div class="followButtons">
+    <% if(!locals.currentUser.hasFollowed(user)){ %>
     <form method="POST" action="/users/<%= user._id %>/follow">
       <button class="button is-success is-rounded">Follow</button>
     </form>
+    <% } else { %>
     <form method="POST" action="/users/<%= user._id %>/follow/:followId">
-
       <input type="hidden" name="_method" value="DELETE">
       <button class="button is-danger is-rounded">Unfollow</button>
-
     </form>
-  </div>
+      <% } %>
+    </div>
+
   <div class="columns">
     <div class="column is-one-quarter-desktop is-half-tablet">
+      <h3 class="title is-3">Profile</h3>
       <label class="label">Username:</label>
       <div class="usernameinput">
         <p> <%= user.username  %> </p>
 
       </div>
+        <% if(user._id.toString() === locals.currentUser._id.toString()) { %>
       <label class="label">Email:</label>
       <p> <%= user.email  %> </p>
+        <% } %>
       <label class="label">About You:</label>
       <p> <%= user.aboutyou  %> </p>
       <div class="field">
         <label class="label">Profile Image</label>
         <img src="<%= user.imageSRC %>" alt="<%= user.username  %>">
       </div>
-
     </div>
 
 
@@ -82,12 +88,19 @@
                   </div>
                   <div class="column">
                     <h3 class="title is-3">Following</h3>
+                    <ul>
+
+
                     <% user.followedUsers.forEach(user => { %>
+                      <li>
                       <div class="profileHead">
-                      <img src="<%= user._id.imageSRC %>" alt="" width="50px">
-                      <p><%= user._id.username %></p>
+
+                        <a href="/users/<%= user._id%>"><img src="<%= user._id.imageSRC %>" alt="" width="50px"></a>
+                        <a href="/users/<%= user._id%>"><p><%= user._id.username %></p></a>
+                        </li>
                       <% }) %>
                     </div>
+                    </ul>
 
 
                   </div>

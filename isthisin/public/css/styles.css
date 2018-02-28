@@ -86,8 +86,11 @@ p {
 img {
   border-radius: 10px;
 }
+.newimgPrview {
+  width: 420px;
+  height: 420px;
+}
 .profileHead {
-  width: 110px;
   margin: 0 auto;
 }
 .profileHead p {
@@ -98,6 +101,8 @@ img {
 .profileHead img {
   float: left;
   text-align: center;
+  width: 50px;
+  height: 50px;
 }
 .profileEdit {
   width: 110px;
@@ -123,6 +128,9 @@ img {
 
 .field {
   text-align: left;
+}
+.box {
+  padding: 10px;
 }
 h3 {
   font-family: 'Indie Flower', cursive;
@@ -150,4 +158,11 @@ html {
 
 .title:not(:last-child) {
     margin-bottom: 0;
+}
+.columnShow {
+  text-align: center;
+}
+#mobile-menu .navbar-item {
+  background-color: grey;
+
 }

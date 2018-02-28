@@ -11,10 +11,20 @@ const schema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   image: { type: String },
-  aboutyou: {type: String, maxlength: 360, required: true },
+  aboutyou: {type: String, maxlength: 360 },
   faves: [{ type: mongoose.Schema.ObjectId, ref: 'Question'}],
   followedUsers: [ followSchema ]
 });
+
+schema.methods.isOwnedBy = function(user) {
+  return this.user && user && user._id.equals(this.user._id);
+};
+
+schema.methods.hasFollowed = function hasFollowed(user) {
+  return this.followedUsers.some((follow) => {
+    return follow.equals(user._id);
+  });
+};
 
 schema
   .virtual('imageSRC')

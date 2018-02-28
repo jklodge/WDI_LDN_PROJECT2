@@ -6,7 +6,7 @@
         <img class="showimage" src="<%= question.image %>" alt="<%= question.title %>">
       </figure>
     </div>
-    <div class="column">
+    <div class="column columnShow">
       <% if(question.user) { %>
          <a href="/users/<%= question.user._id%>"><img src="<%= question.user.imageSRC %>" alt="<%= question.user.username  %>" width="40px"></a>
         <p>User: <a href="/users/<%= question.user._id%>"><%= question.user.username %></a></p>
@@ -44,7 +44,7 @@
                 <div class="content">
                   <% if(comment.user) { %>
                   <div class="profileHead">
-                    <img src="<%= comment.user.image %>" alt="<%= comment.user.username  %>" width="50px">
+                    <img src="<%= comment.user.imageSRC %>" alt="<%= comment.user.username  %>" width="50px">
                   <p><%= comment.user.username  %></p>
                   </div>
                   <p>Comment: <%= comment.content %> </p>

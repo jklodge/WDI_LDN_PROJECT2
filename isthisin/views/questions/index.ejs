@@ -1,13 +1,5 @@
 <main class="container">
-  <form>
-    <select name="title">
-      <option>ALL</option>
-      <% titles.forEach(title => { %>
-        <option<% if(title === selectedTitle) {%> selected<% } %>><%= title %></option>
-        <% }) %>
-      </select>
-      <button>Go</button>
-    </form>
+  <h3 class="title is-3">Your Questions Answered!</h3>
   <div class="columns is-multiline">
     <% questions.forEach(question => { %>
     <div class="column is-one-quarter-desktop is-half-tablet">

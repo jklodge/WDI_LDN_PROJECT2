@@ -1,16 +1,19 @@
-<div class="container">
+<h3 class="logo is-3">Is this in?</h3>
+
+<div class="container login">
+  <div class="loginbox">
   <form method="POST" action="/questions">
     <div class="field">
       <label class="label">Question</label>
       <div class="control">
-        <input class="input" name="title" type="text" placeholder="What's your question?" required minlength='2'>
+        <input class="input" name="title" type="text" placeholder="Do people still rock these?" required minlength='2'>
       </div>
     </div>
 
     <div class="field">
    <label class="label">Image</label>
    <div class="control">
-     <img class="imgPreview" src="" alt="">
+     <img class="imgPreview newimgPrview" src="" alt="" style="background-image">
      <input type="hidden" name="image" required />
      <button class="button image-upload" type="button">Choose an image to upload</button>
    </div>
@@ -35,4 +38,5 @@
       <button class="button is-primary">Submit</button>
     </div>
   </form>
+</div>
 </div>
