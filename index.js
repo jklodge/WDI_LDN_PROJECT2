@@ -11,7 +11,7 @@ const userAuth = require('./lib/userAuth');
 //create our Express app
 const app = express();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/questions-database');
 
 app.set('view engine', 'ejs');

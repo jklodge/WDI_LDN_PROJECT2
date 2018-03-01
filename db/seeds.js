@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird');
 const Question = require('../models/question');
 const User = require('../models/user');
 
-mongoose.connect('mongodb://localhost/questions-database', (err, db) => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/questions-database', (err, db) => {
   db.dropDatabase();
   // whats happening here
   User.create({
@@ -59,6 +59,30 @@ mongoose.connect('mongodb://localhost/questions-database', (err, db) => {
     }, {
       title: 'Is this still in?',
       image: '/images/shoes4.jpg',
+      moreinfo: 'Got this ages ago but are these still in?',
+      from: 'Topshop',
+      user: user
+    }, {
+      title: 'Is this still in?',
+      image: '/images/head.jpg',
+      moreinfo: 'Headphones?',
+      from: 'Currys',
+      user: user
+    }, {
+      title: 'Is this still in?',
+      image: '/images/jumper.jpg',
+      moreinfo: 'This jumper?',
+      from: 'Urban Outfitters',
+      user: user
+    }, {
+      title: 'Is this still in?',
+      image: '/images/outfit2.jpg',
+      moreinfo: 'Got this ages ago but are these still in?',
+      from: 'Topshop',
+      user: user
+    }, {
+      title: 'Is this still in?',
+      image: '/images/top1.jpg',
       moreinfo: 'Got this ages ago but are these still in?',
       from: 'Topshop',
       user: user
