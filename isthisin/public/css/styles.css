@@ -23,6 +23,7 @@
   text-align: center;
   font-family: 'Indie Flower', cursive;
   background-color: #dfddde;
+  border: #808080 2px solid;
 }
 .card-content{
   padding: 10px;
@@ -52,6 +53,15 @@ a + form {
 .voteButtons {
   margin-top: 20px;
 }
+.downvote {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.no-click {
+    cursor: none;
+}
+
 p.user {
     display: inline-block;
     padding: 5px;
@@ -109,6 +119,12 @@ img {
   margin: 0 auto;
   display: flex;
 }
+.profileColumn {
+  text-align: center;
+}
+.profileColumn .field {
+  text-align: center;
+}
 .edit {
   display: flex;
   align-self: center;
@@ -136,11 +152,10 @@ h3 {
   font-family: 'Indie Flower', cursive;
   text-align: center;
   font-size: 40px;
+  margin-bottom: 10px;
 }
 html {
     background-color: #eee;
-    background-image: url(/images/camera.jpg);
-    background-size: contain; 
 }
 
 .logo {
@@ -165,6 +180,7 @@ html {
   text-align: center;
 }
 #mobile-menu .navbar-item {
-  background-color: grey;
-
+  background-color: rgba(45, 45, 45, 0.9);
+  z-index: 3;
+  text-align: right;
 }

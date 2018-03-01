@@ -18,13 +18,14 @@
     </div>
 
     <div class="field">
-   <label class="label">Profile Image</label>
-   <div class="control">
-     <img class="imgPreview newimgPrview" src="<%= locals.currentUser.imageSRC  %>">
-     <input type="hidden" name="image" required />
-     <button class="button image-upload" type="button">Choose an image to upload</button>
+     <label class="label">Profile Image</label>
+     <div class="control">
+       <img class="imgPreview newimgPrview" src="<%= locals.currentUser.imageSRC  %>">
+       <input type="hidden" name="image" value="<%= locals.currentUser.image %>" required />
+       <button class="button image-upload" type="button">Choose an image to upload</button>
+     </div>
    </div>
- </div>
+
     <div class="field">
       <label class="label">A bit about you!</label>
       <div class="control">

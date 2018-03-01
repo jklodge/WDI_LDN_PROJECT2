@@ -23,21 +23,22 @@
         </div>
         <div class="voteButtons">
         <form method="POST" action="/questions/<%= question._id %>/upvote">
+        <% let totalvotes = question.downvotes.length + question.upvotes.length %>
+        <% let votesCalcUp = ( Math.round( question.upvotes.length / totalvotes * 100 )) %>
+        <% let votesCalcDown = ( Math.round( question.downvotes.length / totalvotes * 100 )) %>
+        <% if(isNaN(votesCalcUp)) votesCalcUp = 0 %>
+        <% if(isNaN(votesCalcDown)) votesCalcDown = 0 %>
           <% if(question.hasBeenUpvotedBy(locals.currentUser)) { %>
-            <% let totalvotes = question.downvotes.length + question.upvotes.length %>
-            <button class="button upvote is-success is-rounded default" disabled>Yay <%=( Math.round( question.upvotes.length / totalvotes * 100 ))%>%</button>
+          <button class="button upvote is-success is-rounded default" disabled>Yay <%= votesCalcUp %>%</button>
           <% } else { %>
-            <% let totalvotes = question.downvotes.length + question.upvotes.length %>
-            <button class="button upvote is-success is-rounded default">Yay <%=( Math.round( question.upvotes.length / totalvotes * 100 ))%>%</button>
+            <button class="button upvote is-success is-rounded default">Yay <%= votesCalcUp %>%</button>
           <% } %>
         </form>
         <form method="POST" action="/questions/<%= question._id %>/downvote">
           <% if(question.hasBeenDownvotedBy(locals.currentUser)) { %>
-            <% let totalvotes = question.downvotes.length + question.upvotes.length %>
-            <button class="button downvote is-warning is-rounded default" disabled>Sos, not Sos - <%=( Math.round( question.downvotes.length / totalvotes * 100 ))%>%</button>
+            <button class="button downvote is-warning is-rounded default" disabled>Sos, not Sos - <%= votesCalcDown %>%</button>
           <% } else{ %>
-            <% let totalvotes = question.downvotes.length + question.upvotes.length %>
-            <button class="button downvote is-warning is-rounded default">Sos, not Sos - <%=( Math.round( question.downvotes.length / totalvotes * 100 ))%>%</button>
+            <button class="button downvote is-warning is-rounded default">Sos, not Sos - <%= votesCalcDown %>%</button>
           <% } %>
         </form>
 

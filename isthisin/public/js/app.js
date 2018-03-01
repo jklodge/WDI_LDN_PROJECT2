@@ -2,8 +2,7 @@ $(() => {
 /* global filestack */
   const client = filestack.init('AB6Lmdk1RRjG0sQAhRSpsz');
   const storedScrollTop = window.localStorage.getItem('scrollTop');
-  const $burger = $('.navbar-burger');
-  const $menu = $('.navbar-menu');
+
   const $voteButtons = $('.voteButtons');
   const $fave = $('.fave');
 
@@ -36,11 +35,6 @@ $(() => {
     window.localStorage.setItem('scrollTop', $(window).scrollTop());
     e.target.click();
   });
-
-  // $burger.on('click', () => {
-  //   $burger.toggleClass('is-active');
-  //   $menu.toggleClass('is-active');
-  // });
 
   $('form').validate();
   const uploadBtn = $('button.image-upload');

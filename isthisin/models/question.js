@@ -4,7 +4,16 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
   content: { type: String },
   user: { type: mongoose.Schema.ObjectId, ref: 'User'} // ref user is saying I want the user model/object as we about to reference the user.
+}, {
+  timestamps: true
 });
+
+commentSchema
+  .virtual('formattedDate')
+  .get(function getFormattedDate() {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return this.createdAt.getDate() + '-' + monthNames[this.createdAt.getMonth()] + '-' + this.createdAt.getFullYear();
+  });
 
 commentSchema.methods.isOwnedBy = function(user) { //have to use .methods
   return this.user && user && user._id.equals(this.user._id);//if user's comment id matches the id that I pass into this function. And we'll use this function for allowing users to delete only their comments.

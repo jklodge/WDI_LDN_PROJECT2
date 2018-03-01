@@ -13,7 +13,7 @@ function usersShow(req, res, next) {
   // find all the questions that the user has commented on
   Promise.props({
     questions: Question.find({ 'comment.user': req.params.id }).exec(),
-    user: User.findById(req.params.id).populate('faves followedUsers followedUsers._id').exec()
+    user: User.findById(req.params.id).populate('faves followedUsers followedUsers._id followers followers._id').exec()
   })
     .then(data => {
       if(!data.user) return res.render('pages/404');
@@ -34,10 +34,13 @@ function updateRoute(req, res) {
     .then(() => res.redirect(`/users/${req.params.id}`));
 }
 
+
 function followCreate(req, res, next) {
-  User.findById(req.currentUser)
+  req.currentUser.followedUsers.push(req.params.id); //assign assigns anythiing on the other side (req.body) onto the question
+  req.currentUser.save()
+    .then(() => User.findById(req.params.id))
     .then(user => {
-      user.followedUsers.push(req.params.id); //assign assigns anythiing on the other side (req.body) onto the question
+      user.followers.push(req.currentUser); //assign assigns anythiing on the other side (req.body) onto the question
       return user.save();
     })
     .then(() => res.redirect(`/users/${req.params.id}`))
@@ -45,15 +48,17 @@ function followCreate(req, res, next) {
 }
 
 function followDelete(req, res, next) {
-  User.findById(req.currentUser)
+  req.currentUser.followedUsers = req.currentUser.followedUsers.filter(userId => !userId.equals(req.params.id));
+  req.currentUser.save()
+    .then(() => User.findById(req.params.id))
     .then(user => {
-      const followedUser = user.followedUsers.id(req.params.id);
-      followedUser.remove();
+      user.followers = user.followers.filter(userId => !userId.equals(req.params.id));
       return user.save();
     })
     .then(() => res.redirect(`/users/${req.params.id}`))
     .catch(next);
 }
+
 
 
 module.exports = {

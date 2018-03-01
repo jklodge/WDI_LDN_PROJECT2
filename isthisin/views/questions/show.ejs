@@ -21,11 +21,11 @@
             <button class="button is-dark">Delete</button>
           </form>
         <% } %>
+        <hr />
           <form method="POST" action="/questions/<%= question._id %>/comments">
             <textarea class="textarea" name="content" placeholder="Dont just vote, give them tips!"></textarea>
-            <button class="button is-primary">Submit</button>
+            <button class="button is-info">Comment</button>
           </form>
-
         <div class="column coltwo">
           <ul class="comments">
             <% question.comments.forEach(comment => { %>
@@ -45,7 +45,11 @@
                   <% if(comment.user) { %>
                   <div class="profileHead">
                     <img src="<%= comment.user.imageSRC %>" alt="<%= comment.user.username  %>" width="50px">
+
                   <p><%= comment.user.username  %></p>
+                  </div>
+                  <div>
+                  <p><%= comment.formattedDate  %></p>
                   </div>
                   <p>Comment: <%= comment.content %> </p>
 

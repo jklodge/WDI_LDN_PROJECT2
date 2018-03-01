@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
-const followSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.ObjectId, ref: 'User'}
-});
-
 const schema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -13,7 +8,8 @@ const schema = new mongoose.Schema({
   image: { type: String },
   aboutyou: {type: String, maxlength: 360 },
   faves: [{ type: mongoose.Schema.ObjectId, ref: 'Question'}],
-  followedUsers: [ followSchema ]
+  followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User'}],
+  followers: [{ type: mongoose.Schema.ObjectId, ref: 'User'}]
 });
 
 schema.methods.isOwnedBy = function(user) {
