@@ -8,12 +8,11 @@ mongoose.Promise = require('bluebird');
 const session = require('express-session');
 const flash = require('express-flash');
 const userAuth = require('./lib/userAuth');
-const formidable = require('formidable');
 //create our Express app
 const app = express();
 
 const PORT = 8000;
-mongoose.connect('mongodb://localhost/questions-database');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/questions-database');
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
