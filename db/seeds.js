@@ -46,45 +46,39 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/questions-datab
       user: user
     }, {
       title: 'Is this still in?',
-      image: '/images/outfit2.jpg',
-      moreinfo: 'Got this ages ago but are these still in?',
-      from: 'Topshop',
-      user: user
-    }, {
-      title: 'Is this still in?',
-      image: '/images/top1.jpg',
-      moreinfo: 'Got this ages ago but are these still in?',
-      from: 'Topshop',
-      user: user
-    }, {
-      title: 'Is this still in?',
       image: '/images/shoes4.jpg',
       moreinfo: 'Got this ages ago but are these still in?',
       from: 'Topshop',
       user: user
     }, {
-      title: 'Is this still in?',
+      title: 'Headphones?',
       image: '/images/head.jpg',
-      moreinfo: 'Headphones?',
+      moreinfo: 'Got these from my mate',
       from: 'Currys',
       user: user
     }, {
-      title: 'Is this still in?',
+      title: 'This jumper?',
       image: '/images/jumper.jpg',
-      moreinfo: 'This jumper?',
+      moreinfo: 'Want to wear this to a tech interview, I am a junior dev?',
       from: 'Urban Outfitters',
       user: user
     }, {
-      title: 'Is this still in?',
-      image: '/images/outfit2.jpg',
-      moreinfo: 'Got this ages ago but are these still in?',
-      from: 'Topshop',
+      title: 'Is my dress too small?',
+      image: '/images/megdress.jpg',
+      moreinfo: 'Is this too small?',
+      from: 'ASOS',
       user: user
     }, {
-      title: 'Is this still in?',
-      image: '/images/top1.jpg',
-      moreinfo: 'Got this ages ago but are these still in?',
-      from: 'Topshop',
+      title: 'Is my hat cool?',
+      image: '/images/hat.jpg',
+      moreinfo: 'Is my hat cool?',
+      from: 'JD Sports',
+      user: user
+    }, {
+      title: 'Do you like my shoes?',
+      image: '/images/katie.jpg',
+      moreinfo: 'Just for casual days out',
+      from: 'Timberland',
       user: user
     }]))
     .then(questions => console.log(`${questions.length} questions created`))

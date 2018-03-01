@@ -52,7 +52,7 @@ function followDelete(req, res, next) {
   req.currentUser.save()
     .then(() => User.findById(req.params.id))
     .then(user => {
-      user.followers = user.followers.filter(userId => !userId.equals(req.params.id));
+      user.followers = user.followers.filter(userId => !userId.equals(req.currentUser._id));
       return user.save();
     })
     .then(() => res.redirect(`/users/${req.params.id}`))
