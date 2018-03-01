@@ -1,6 +1,6 @@
 <main class="container">
   <div class="profileEdit">
-    <h3> <%= user.username  %> </h3>
+    <h3> <%= user.username %>'s Page </h3>
     <% if(user._id.equals(locals.currentUser._id)) { %>
       <a href="/users/<%= user._id %>/edit" class="button edit is-dark">Edit</a>
     <% } %>
@@ -19,8 +19,8 @@
       <% } %>
     </div>
   <% } %>
-  <div class="columns">
-    <div class="column profileColumn is-one-quarter-desktop is-half-tablet">
+  <div class="columns is mobile">
+    <div class="column profileColumn is-one-quarter-desktop is-half-tablet is-three-quarters-mobile">
       <h3 class="title is-3">Profile</h3>
       <label class="label">Username:</label>
       <div class="usernameinput">
@@ -39,8 +39,8 @@
     </div>
 
 
-    <div class="column profileColumn is-one-quarter-desktop is-half-tablet">
-      <h3 class="title is-3">Your Faves</h3>
+    <div class="column profileColumn is-one-quarter-desktop is-half-tablet is-three-quarters-mobile">
+      <h3 class="title is-3"><%= user.username %> Faves</h3>
       <% user.faves.forEach(question => { %>
         <a href="/questions/<%= question.id %>">
           <div class="card">
@@ -60,52 +60,35 @@
             <% } %>
 
             <div class="card-image" style="background-image: url(<%= question.image %>)"></div>
-
-              <div class="voteButtons">
-                <form method="POST" action="/questions/<%= question._id %>/upvote">
-                <% if(question.hasBeenUpvotedBy(user)) { %>
-                  <button class="button upvote is-success is-rounded" disabled>Yay (<%= question.upvotes.length %>)</button>
-                <% } else { %>
-                  <button class="button upvote is-success is-rounded">Yay (<%= question.upvotes.length %>)</button>
-                <% } %>
-                </form>
-                <form method="POST" action="/questions/<%= question._id %>/downvote">
-                  <% if(question.hasBeenDownvotedBy(user)) { %>
-                    <button class="button downvote is-warning is-rounded" disabled>Sorry, not Sorry (<%= question.downvotes.length %>)</button>
-                  <% } else{ %>
-                    <button class="button downvote is-warning is-rounded">Sorry, not Sorry (<%= question.downvotes.length %>)</button>
-                  <% } %>
-                </form>
-                </div>
-              </div>
-            </a>
-            <% }) %>
           </div>
-          <div class="column is-one-quarter-desktop is-half-tablet">
-              <h3 class="title is-3">Followers</h3>
-              <ul>
-                <% user.followers.forEach(user => { %>
-                  <li>
-                    <div class="profileHead">
-                      <a href="/users/<%= user._id %>"><img src="<%= user.imageSRC %>" alt="" width="50px"></a>
-                      <a href="/users/<%= user._id %>"><p><%= user.username %></p></a>
-                  </li>
-                <% }) %>
-                    </div>
-              </ul>
-              <div class="column is-one-quarter-desktop is-half-tablet">
-                <h3 class="title is-3">Following</h3>
-                <ul>
-                  <% user.followedUsers.forEach(user => { %>
-                    <li>
-                    <div class="profileHead">
-                    <a href="/users/<%= user._id %>"><img src="<%= user.imageSRC %>" alt="" width="50px"></a>
-                    <a href="/users/<%= user._id %>"><p><%= user.username %></p></a>
-                    </li>
-                    <% }) %>
-                  </div>
-                </ul>
-              </div>
-          </div>
+        </a>
+      <% }) %>
+    </div>
+    <div class="column is-one-quarter-desktop is-half-tablet followers is-three-quarters-mobile">
+      <h3 class="title is-3">Followers</h3>
+      <ul>
+        <% user.followers.forEach(user => { %>
+          <li>
+            <div class="profileHead">
+              <a href="/users/<%= user._id %>"><img src="<%= user.imageSRC %>" alt="" width="50px"></a>
+              <a href="/users/<%= user._id %>"><p><%= user.username %></p></a>
+            </li>
+          <% }) %>
         </div>
-      </main>
+      </ul>
+      <div class="column is-one-quarter-desktop is-half-tablet following is-three-quarters-mobile">
+        <h3 class="title is-3">Following</h3>
+        <ul>
+          <% user.followedUsers.forEach(user => { %>
+            <li>
+              <div class="profileHead">
+                <a href="/users/<%= user._id %>"><img src="<%= user.imageSRC %>" alt="" width="50px"></a>
+                <a href="/users/<%= user._id %>"><p><%= user.username %></p></a>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
