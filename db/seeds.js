@@ -51,28 +51,10 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/questions-datab
       from: 'Topshop',
       user: user
     }, {
-      title: 'Headphones?',
-      image: '/images/head.jpg',
-      moreinfo: 'Got these from my mate',
-      from: 'Currys',
-      user: user
-    }, {
       title: 'This jumper?',
       image: '/images/jumper.jpg',
       moreinfo: 'Want to wear this to a tech interview, I am a junior dev?',
       from: 'Urban Outfitters',
-      user: user
-    }, {
-      title: 'Is my dress too small?',
-      image: '/images/megdress.jpg',
-      moreinfo: 'Is this too small?',
-      from: 'ASOS',
-      user: user
-    }, {
-      title: 'Is my hat cool?',
-      image: '/images/hat.jpg',
-      moreinfo: 'Is my hat cool?',
-      from: 'JD Sports',
       user: user
     }, {
       title: 'Do you like my shoes?',
