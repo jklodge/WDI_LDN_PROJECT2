@@ -5,6 +5,7 @@
       <a href="/users/<%= user._id %>/edit" class="button edit is-dark">Edit</a>
   <% } %>
 </div>
+  <% if(user._id.toString() !== locals.currentUser._id.toString()) { %>
   <div class="followButtons">
     <% if(!locals.currentUser.hasFollowed(user)){ %>
     <form method="POST" action="/users/<%= user._id %>/follow">
@@ -17,7 +18,7 @@
     </form>
       <% } %>
     </div>
-
+    <% } %>
   <div class="columns">
     <div class="column is-one-quarter-desktop is-half-tablet">
       <h3 class="title is-3">Profile</h3>

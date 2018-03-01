@@ -26,7 +26,7 @@ schema.methods.isOwnedBy = function(user) {
 };
 
 schema.methods.hasBeenUpvotedBy = function(user) {
-  return user && this.upvotes.some(userId => user._id.equals(userId));
+  return user && this.upvotes.some(userId => user._id.equals(userId));//whats this saying?
 };
 
 schema.methods.hasBeenDownvotedBy = function(user) {

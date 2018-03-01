@@ -2,8 +2,8 @@
   color: black;
 }
 .hero.homepage {
-  background-image: url(/images/mainmodel.jpg);
-  background-size: stretch;
+  background-image: url(/images/camera.jpg);
+  background-size: cover;
   height: 100%;
   color: black;
 }
@@ -139,6 +139,8 @@ h3 {
 }
 html {
     background-color: #eee;
+    background-image: url(/images/camera.jpg);
+    background-size: contain; 
 }
 
 .logo {
