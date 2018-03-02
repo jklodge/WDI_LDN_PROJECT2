@@ -158,7 +158,7 @@ h3 {
 }
 html {
     background-color: #eee;
-    
+
 }
 
 .logo {
@@ -217,6 +217,9 @@ html {
   }
 }
 @media (max-width: 768px) {
+  .hero.homepage {
+    height: 100vh;
+  }
   .column {
     margin: auto;
   }
