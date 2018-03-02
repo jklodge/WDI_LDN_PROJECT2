@@ -4,6 +4,7 @@
       <figure class="image">
         <img class="showimage" src="<%= question.image %>" alt="<%= question.title %>">
       </figure>
+
     </div>
     <div class="column columnShow is-three-quarters-mobile is-half-desktop">
       <% if(question.user) { %>
@@ -12,8 +13,8 @@
       <% } %>
       <p>Extra info: <%= question.moreinfo %></p>
       <p>Where is it from? <%= question.from %></p>
+      <% if(question.isOwnedBy(locals.currentUser)) { %>
         <hr />
-        <% if(question.isOwnedBy(locals.currentUser)) { %>
           <a href="/questions/<%= question._id %>/edit" class="button is-light">Edit</a>
           <form method="POST" action="/questions/<%= question._id %>">
             <input type="hidden" name="_method" value="DELETE">
