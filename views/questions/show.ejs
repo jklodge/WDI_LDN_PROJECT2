@@ -1,6 +1,18 @@
 <div class="container showcontainer">
     <div class="column colone is-three-quarters-mobile is-half-desktop">
       <h3 class="title"><%= question.title %></h3>
+      <% if (locals.currentUser) { %>
+        <% if(!locals.currentUser.hasFavorited(question)){ %>
+          <form method="POST" action="/questions/<%= question._id %>/favorite">
+            <button class="button is-primary fave"><i class="fa fa-heart fave"></i></button>
+          </form>
+        <% } else { %>
+          <form method="GET" action="/questions/<%= question._id %>/favorite">
+            <button class="button is-danger fave"><i class="fa fa-heart fave"></i></button>
+          </form>
+        <% } %>
+      <% } %>
+
       <figure class="image">
         <img class="showimage" src="<%= question.image %>" alt="<%= question.title %>">
       </figure>

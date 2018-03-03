@@ -41,12 +41,15 @@
 
     <div class="column profileColumn is-one-quarter-desktop is-half-tablet is-three-quarters-mobile">
       <h3 class="title is-3"><%= user.username %> Faves</h3>
+
       <% user.faves.forEach(question => { %>
         <a href="/questions/<%= question.id %>">
           <div class="card">
             <div class="card-content">
               <h3 class="title"><%= question.title %></h3>
             </div>
+
+            <% if(user._id.equals(locals.currentUser._id)) { %>
             <% if(!user.hasFavorited(question)){ %>
               <form method="POST" action="/questions/<%= question._id %>/favorite">
                 <input type="hidden" name="_method" value="<% question._id %>">
@@ -58,7 +61,7 @@
                 <button type="button" class="button is-danger">Unfavourite</button>
               </form>
             <% } %>
-
+            <% } %>
             <div class="card-image" style="background-image: url(<%= question.image %>)"></div>
           </div>
         </a>
