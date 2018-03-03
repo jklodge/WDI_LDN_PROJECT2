@@ -1,0 +1,67 @@
+<div class="container" class="showcontainer">
+  <div class="columns">
+    <div class="column colone">
+      <h3 class="title"><%= question.title %></h3>
+      <figure class="image">
+        <img class="showimage" src="<%= question.image %>" alt="<%= question.title %>">
+      </figure>
+    </div>
+    <div class="column columnShow">
+      <% if(question.user) { %>
+         <a href="/users/<%= question.user._id%>"><img src="<%= question.user.imageSRC %>" alt="<%= question.user.username  %>" width="40px"></a>
+        <p>User: <a href="/users/<%= question.user._id%>"><%= question.user.username %></a></p>
+      <% } %>
+      <p>Extra info: <%= question.moreinfo %></p>
+      <p>Where is it from? <%= question.from %></p>
+        <hr />
+        <% if(question.isOwnedBy(locals.currentUser)) { %>
+          <a href="/questions/<%= question._id %>/edit" class="button is-light">Edit</a>
+          <form method="POST" action="/questions/<%= question._id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="button is-dark">Delete</button>
+          </form>
+        <% } %>
+        <hr />
+          <form method="POST" action="/questions/<%= question._id %>/comments">
+            <textarea class="textarea" name="content" placeholder="Dont just vote, give them tips!"></textarea>
+            <button class="button is-info">Comment</button>
+          </form>
+        <div class="column coltwo">
+          <ul class="comments">
+            <% question.comments.forEach(comment => { %>
+            <li>
+          <div class="box">
+            <% if(comment.isOwnedBy(locals.currentUser)) { %>
+              <form class="delete" method="POST" action="/questions/<%= question._id %>/comments/<%= comment._id %>">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="delete">x</button>
+              </form>
+              <% } %>
+              <article class="media">
+                <div class="media-left">
+                </div>
+                <div class="media-content">
+                <div class="content">
+                  <% if(comment.user) { %>
+                  <div class="profileHead">
+                    <img src="<%= comment.user.imageSRC %>" alt="<%= comment.user.username  %>" width="50px">
+
+                  <p><%= comment.user.username  %></p>
+                  </div>
+                  <div>
+                  <p><%= comment.formattedDate  %></p>
+                  </div>
+                  <p>Comment: <%= comment.content %> </p>
+
+                  <% } %>
+                </div>
+                </div>
+              </article>
+          </div>
+                </li>
+                <% }) %>
+              </ul>
+
+    </div>
+  </div>
+</div>
