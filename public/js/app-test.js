@@ -1,5 +1,5 @@
 $(() => {
-/* global filestack */
+  /* global filestack */
   const client = filestack.init('AB6Lmdk1RRjG0sQAhRSpsz');
   const storedScrollTop = window.localStorage.getItem('scrollTop');
 
@@ -10,13 +10,12 @@ $(() => {
     client.pick()
       .then(res => {
         $(e.target).siblings('[type=hidden]').val(res.filesUploaded[0].url);
-        console.log(e);
         $('.imgPreview').attr('src', res.filesUploaded[0].url);
       })
       .catch(err => console.log(err));
   }
 
-  if(storedScrollTop) {
+  if (storedScrollTop) {
     $(window).scrollTop(storedScrollTop);
     window.localStorage.removeItem('scrollTop');
   }

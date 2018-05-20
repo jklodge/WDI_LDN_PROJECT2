@@ -59,8 +59,6 @@ function followDelete(req, res, next) {
     .catch(next);
 }
 
-
-
 module.exports = {
   index: usersIndex,
   show: usersShow,
